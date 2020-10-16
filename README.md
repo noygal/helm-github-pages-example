@@ -40,3 +40,18 @@ Helm docs:
 Go to your github repository _Setting_ tab and scroll down to the _GitHub Pages_ section, on _Source_ select branch `main` and folder `/docs`, lastly click on th _save_ button.
 
 Commit the files and folders we've created and push it to GitHub.
+
+## Step 5 - add your repository to helm
+
+```bash
+# Replace the url with your repository folder
+helm repo add helm-github-pages-example https://noygal.github.io/helm-github-pages-example/
+helm repo list
+helm search repo helm-github-pages-example
+```
+
+You can also install the chart to your cluster:
+
+```bash
+helm install first-chart helm-github-pages-example/first-chart
+```
