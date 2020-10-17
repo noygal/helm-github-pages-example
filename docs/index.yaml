@@ -3,7 +3,7 @@ entries:
   first-chart:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2020-10-17T22:17:41.241502+03:00"
+    created: "2020-10-17T23:19:29.989809+03:00"
     description: A Helm chart for Kubernetes - new version
     digest: 1bfccc8b4429a2ee297d937a53fae5d74b8f6d018a6000a976a78a294d6b208f
     name: first-chart
@@ -13,7 +13,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2020-10-17T22:17:41.240935+03:00"
+    created: "2020-10-17T23:19:29.98916+03:00"
     description: A Helm chart for Kubernetes
     digest: 2569eb3c26cc13c2165534623e85ee7c495f904580cca958cb719ec164993b91
     name: first-chart
@@ -24,12 +24,16 @@ entries:
   second-chart:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2020-10-17T22:17:41.242034+03:00"
+    created: "2020-10-17T23:19:29.991131+03:00"
+    dependencies:
+    - name: first-chart
+      repository: https://noygal.github.io/helm-github-pages-example
+      version: 0.1.1
     description: A Helm chart for Kubernetes
-    digest: 0aacf67ed97917163d5153b5d48d43706d4075db76ab5975c4f6dc14687e6d99
+    digest: bbd54cc6147f6860ff034ff205db71e5254ffc75b46683620393972a590c1ab7
     name: second-chart
     type: application
     urls:
     - https://noygal.github.io/helm-github-pages-example/second-chart-0.1.0.tgz
     version: 0.1.0
-generated: "2020-10-17T22:17:41.240189+03:00"
+generated: "2020-10-17T23:19:29.988063+03:00"

@@ -1,0 +1,6 @@
+dependencies:
+- name: first-chart
+  repository: https://noygal.github.io/helm-github-pages-example
+  version: 0.1.1
+digest: sha256:b72a6bfebc90cf42f268b9706d237445171819061ed73005f499e724d728cf8e
+generated: "2020-10-17T22:59:29.023943+03:00"
