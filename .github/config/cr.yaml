@@ -1,0 +1,5 @@
+owner: noygal
+git-repo: helm-github-pages-example
+package-path: docs
+index-path: docs
+charts-repo: https://noygal.github.io/helm-github-pages-example
