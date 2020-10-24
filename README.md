@@ -128,6 +128,97 @@ first-chart:
     tag: latest
 ```
 
-## Step 8 - github actions ?
+## Step 8 - github actions - testing
 
-## Step 9 - html file
+Helm supports a few _Github Action_ operators, for adding a basic linting and testing you can the [helm-chart-testing](https://github.com/marketplace/actions/helm-chart-testing) action.
+
+Add the `.github/workflows/main.yml` file to the repository and push to github.
+
+```yaml
+name: Lint and Test Charts
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  # Reference https://github.com/marketplace/actions/helm-chart-testing
+  lint-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Fetch history
+        run: git fetch --prune --unshallow
+
+      - name: Run chart-testing (lint)
+        id: lint
+        uses: helm/chart-testing-action@v1.1.0
+        with:
+          command: lint
+          config: .github/config/cf.yaml
+
+      - name: Create kind cluster
+        uses: helm/kind-action@v1.0.0
+        # Only build a kind cluster if there are chart changes to test.
+        if: steps.lint.outputs.changed == 'true'
+
+      - name: Run chart-testing (install)
+        uses: helm/chart-testing-action@v1.1.0
+        with:
+          command: install
+          config: .github/config/cf.yaml
+
+```
+
+Also due to the changing of `master` branch to `main` we will need to another configuration file:
+
+`.github/config/cf.yaml`
+
+```yaml
+target-branch: main
+```
+
+## Step 9 - github actions - release
+
+Another useful _Github Action_ operator is the [helm-chart-releaser](https://github.com/marketplace/actions/helm-chart-releaser), it's an official `helm` release tool that utilize github repository _Releases_ feature and _Github Pages_ manage git based helm chart repository.
+
+The action is configured to use _Github Pages_ branch based serving on the default `gh-pages`, it would also merge the online version of the current repository file, so the first thing we will need to change the serving method we set on `Step 4`, go to the _Github Pages_ and change it to branch `gh-pages` and the folder `/(root)`.
+
+Add the action file `.github/workflows/release.yaml`
+
+```yaml
+name: Release Charts
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+
+      - name: Run chart-releaser
+        uses: helm/chart-releaser-action@v1.0.0
+        env:
+          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
+```
+
+Notice that after running the action the first time you we have `index.yaml` on the root of the `gh-pages` folder, and new release artifacts.
+
+## Step 10 - html file
