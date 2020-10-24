@@ -14,6 +14,20 @@ entries:
   second-chart:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2020-10-24T21:23:53.099121279Z"
+    dependencies:
+    - name: first-chart
+      repository: https://noygal.github.io/helm-github-pages-example
+      version: 0.1.3
+    description: A Helm chart for Kubernetes
+    digest: 26eabe3662585c15dc3ef0eeadc617b378b8ac3229e5cc92850aee0ede869b9c
+    name: second-chart
+    type: application
+    urls:
+    - https://github.com/noygal/helm-github-pages-example/releases/download/second-chart-0.1.1/second-chart-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2020-10-24T21:19:19.311423195Z"
     description: A Helm chart for Kubernetes
     digest: 09923dce1c63ccedb4b21e086469ec47c1b74f84f8d6563f894c86d78b9b19f8
