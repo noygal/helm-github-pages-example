@@ -171,7 +171,6 @@ jobs:
         with:
           command: install
           config: .github/config/cf.yaml
-
 ```
 
 Also due to the changing of `master` branch to `main` we will need to another configuration file:
@@ -187,6 +186,8 @@ target-branch: main
 Another useful _Github Action_ operator is the [helm-chart-releaser](https://github.com/marketplace/actions/helm-chart-releaser), it's an official `helm` release tool that utilize github repository _Releases_ feature and _Github Pages_ manage git based helm chart repository.
 
 The action is configured to use _Github Pages_ branch based serving on the default `gh-pages`, it would also merge the online version of the current repository file, so the first thing we will need to change the serving method we set on `Step 4`, go to the _Github Pages_ and change it to branch `gh-pages` and the folder `/(root)`.
+
+__NOTICE:__ If you follow the `Step 7 - chart dependencies` the build would fail as the packaging of the `second-chart` would require the `first-chart` artifact from the registry, the simplest way would be to remove the dependency, commit and add it again.
 
 Add the action file `.github/workflows/release.yaml`
 
@@ -216,7 +217,6 @@ jobs:
         uses: helm/chart-releaser-action@v1.0.0
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-
 ```
 
 Notice that after running the action the first time you we have `index.yaml` on the root of the `gh-pages` folder, and new release artifacts.
