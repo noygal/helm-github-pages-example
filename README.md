@@ -222,3 +222,7 @@ jobs:
 Notice that after running the action the first time you we have `index.yaml` on the root of the `gh-pages` folder, and new release artifacts.
 
 ## Step 10 - html file
+
+As a cherry on top we'll add a simple UI to our repository, _Github Pages_ had a build in support for markdown when you enable "themes" section.
+
+The idea is simple, get a template file and use the `index.yaml` as the value file. Check out the `.github/workflows/update-ui.yaml` file for the workflow implementation and `.github/templates/index.hbs` implementation, the solution is NodeJS oriented, but this can be also be achieved by `bash`, `go`, `python` or any other platform.
