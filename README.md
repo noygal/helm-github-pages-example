@@ -1,5 +1,7 @@
 # Step-by-step guide for github pages based helm repository
 
+This helm charts repository is served at: https://noygal.github.io/helm-github-pages-example
+
 ## Perquisites
 
 [Helm](https://helm.sh/) should be install for the helm operation, if you also want to deploy the charts you will need [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) and a cluster available.
